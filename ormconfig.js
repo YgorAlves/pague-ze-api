@@ -8,7 +8,7 @@ module.exports = {
   port: 3308,
   username: 'root',
   password: 'consys',
-  database: 'atv1',
+  database: 'pagueze',
   logging: true,
   synchronize: true,
   ssl: false,
