@@ -3,6 +3,12 @@ require('dotenv').config({
 });
 
 module.exports = {
+  // type: 'mysql',
+  // host: 'localhost',
+  // port: 3308,
+  // username: 'root',
+  // password: 'consys',
+  // database: 'pagueze',
   type: 'postgres',
   host: 'ec2-34-200-106-49.compute-1.amazonaws.com',
   port: 5432,
