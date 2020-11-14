@@ -8,10 +8,11 @@ import { Connection } from 'typeorm';
 import { ChatbotModule } from './chatbot/chatbot.module';
 import { MercadopagoModule } from './mercadopago/mercadopago.module';
 import { AuthModule } from './auth/auth.module';
+import { FinancialmanagerModule } from './financialmanager/financialmanager.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(),
-    UsersModule, AccountsModule, ChatbotModule, MercadopagoModule, AuthModule],
+    UsersModule, AccountsModule, ChatbotModule, MercadopagoModule, AuthModule, FinancialmanagerModule],
   controllers: [AppController],
   providers: [AppService],
 })
