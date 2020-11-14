@@ -1,7 +1,8 @@
 //id username email password
 
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Account } from "./account.entity";
+import * as bcrypt from 'bcrypt'
 
 @Entity('users')
 export class User extends BaseEntity{
@@ -18,15 +19,18 @@ export class User extends BaseEntity{
   @Column('varchar', {length: 250, nullable: false})
   password: string;
 
-  @Column('varchar', {length:200, nullable: false})
-  salt: string;
-
-  @OneToOne(() => Account, acc => acc.user)
-  account: Account
+  @OneToMany(() => Account, acc => acc.user)
+  account: Account[]
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }

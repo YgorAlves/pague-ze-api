@@ -1,6 +1,6 @@
 //id username email password
 
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 
 @Entity('accounts')
@@ -18,7 +18,7 @@ export class Account extends BaseEntity{
   @Column('decimal', {precision: 10, scale: 2})
   balance: number;
 
-  @OneToOne(() => User, user => user.account)
+  @ManyToOne(() => User, user => user.account)
   user: User
 
   @CreateDateColumn()

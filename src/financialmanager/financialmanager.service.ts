@@ -5,6 +5,7 @@ import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/CreateTransaction.dto';
 import { GetMonthDto } from './dto/GetMonth.dto';
+import { IdDto } from './dto/Id.dto';
 
 @Injectable()
 export class FinancialmanagerService {
@@ -35,8 +36,6 @@ export class FinancialmanagerService {
 
     const user = 1
     const fins = this.financialmanagerRepository.createQueryBuilder()
-      .select('financialmanager')
-      .from(FinancialManager,'financialmanager')
       .where('MONTH(financialmanager.createdAt) = MONTH(:month)',{ month: month })
       .andWhere('YEAR(financialmanager.createdAt) = YEAR(:month)',{ month: month })
       .andWhere('financialmanager.userId = :userId', { userId: user})
@@ -44,9 +43,10 @@ export class FinancialmanagerService {
     return fins
   }
 
-  async delete (id: string): Promise<Boolean>{
+  async remove (idDto: IdDto): Promise<Boolean>{
+    const { id } = idDto
     const fin = await this.findOne(id)
-    return await this.financialmanagerRepository.remove(fin) ? true : false
+    return await fin.remove() ? true : false
   }
 
   async findOne (id: string): Promise<FinancialManager> {
@@ -57,6 +57,17 @@ export class FinancialmanagerService {
         HttpStatus.NOT_FOUND
       )
     }
+    return fin
+  }
+
+  async update (idDto: IdDto, createTransactionDto: CreateTransactionDto) {
+    const { id } = idDto
+    const { amount, description, type } = createTransactionDto;
+    const fin = await this.findOne(id)
+    fin.amount  = amount
+    fin.description  = description
+    fin.type  = type
+    await fin.save()
     return fin
   }
 }
