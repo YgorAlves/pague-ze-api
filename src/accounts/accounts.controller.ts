@@ -15,5 +15,7 @@ export class AccountsController {
   // async createAccount(@Body() createAccountDto: CreateAccountDto, @CurrentUser() user: User): Promise<CreateAccountDto> {
   //   return await this.accountsService.createAccount(createAccountDto, user)
   // }
+// Boleto PIX Loterica
+  // @Post('deposito')
 
 }

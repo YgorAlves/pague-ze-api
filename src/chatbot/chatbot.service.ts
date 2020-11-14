@@ -18,14 +18,18 @@ export class ChatbotService {
         term: ["ok"],
         res: "ok?"
       }, {
-        term: ["pagar", ""],
+        term: ["pagar"],
         res: "Beleza! Deseja pagar com Boleto, Pix, ou QrCode?"
       }, {
-        term: ["depositar", ""],
+        term: ["depositar"],
         res: "Beleza! vamos adicionar uma graninha na sua carteira com cartão de credito, débito ou boleto?"
       }, {
-        term: ["ajuda","ajud", "socoro", "help", "socorro", ""],
+        term: ["ajuda","ajud", "socoro", "help", "socorro"],
         res: "Opa! Estou aqui para isso mesmo, você deseja Pagar ou Depositar?"
+      },
+      {
+        term: ["seu nome","chamo", "quem é", "você", "quem"],
+        res: "Opa! eu sou o Zé. Estou pronto para te ajudar, oque deseja? Pagar ou Depositar?"
       },
     ]
     
@@ -34,7 +38,7 @@ export class ChatbotService {
     //pra que? show? array de possibilidade, so cuidado pra n repetir, pq vai pegar o primeiro res que o term bater
     
     // const response = obj.find(o => message.includes(o.term))
-    const response = obj.find(o => o.term.some(ea => message.includes(ea)))
+    const response = obj.find(o => o.term.some(ea => (message.toLowerCase()).includes(ea)))
 
     if(response)
       msg.message = response.res

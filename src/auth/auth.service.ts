@@ -19,11 +19,8 @@ export class AuthService {
     token: string
   ): Promise<{ isValid: boolean; userResult?: IUserResult }> {
     try {
-      console.log(this.jwtService.verify(token))
-
       const { userId } = this.jwtService.verify(token);
       const user = await this.usersService.findOne(userId);
-      console.log(user)
       const { password, ...userResult } = user;
 
       return { userResult, isValid: true };

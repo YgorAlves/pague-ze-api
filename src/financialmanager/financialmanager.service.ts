@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FinancialManager } from 'src/models/financialmanager.entity';
+import { User } from 'src/models/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/CreateTransaction.dto';
@@ -14,10 +15,8 @@ export class FinancialmanagerService {
     private userService: UsersService
   ) { }
 
-  async createTransaction(createTransactionDto: CreateTransactionDto): Promise<FinancialManager> {
-    const { amount, description, type, userId, createdTransaction } = createTransactionDto;
-
-    const user = await this.userService.findOne(userId)
+  async createTransaction(createTransactionDto: CreateTransactionDto, user: User): Promise<FinancialManager> {
+    const { amount, description, type, createdTransaction } = createTransactionDto;
 
     const fin = new FinancialManager()
 
@@ -32,14 +31,13 @@ export class FinancialmanagerService {
     return fin
   }
 
-  async getMonth (getMonthDto: GetMonthDto):Promise<FinancialManager[]> {
+  async getMonth (getMonthDto: GetMonthDto, user: User):Promise<FinancialManager[]> {
     const { month } = getMonthDto
-
-    const user = 1
     const fins = this.financialmanagerRepository.createQueryBuilder()
       .where('MONTH(financialmanager.createdAt) = MONTH(:month)',{ month: month })
       .andWhere('YEAR(financialmanager.createdAt) = YEAR(:month)',{ month: month })
-      .andWhere('financialmanager.userId = :userId', { userId: user})
+      .andWhere('financialmanager.userId = :userId', { userId: user.id })
+      // .andWhere(getMonthDto.filters.type !== undefined ? " type = :type " : '1=1' , { type: getMonthDto.filters.type })
       .getMany()
     return fins
   }

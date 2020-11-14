@@ -9,8 +9,6 @@ export class CreateTransactionDto {
   @IsNotEmpty()
   description: string;
 
-  userId: string;
-
   @ApiProperty({
     example: '1 - Entrada, 0 - Saida',
     description: 'Se a operação a ser cadastrada é entrada ou saida',
