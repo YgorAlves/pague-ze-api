@@ -21,10 +21,10 @@ export class FinancialManager extends BaseEntity{
   @Column('decimal', {precision: 10, scale: 2})
   amount: number;
 
-  // @CreateDateColumn()
-  // createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-  // @UpdateDateColumn()
-  // updateAt: Date;
+  @UpdateDateColumn()
+  updateAt: Date;
 
 }

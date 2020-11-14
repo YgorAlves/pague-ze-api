@@ -38,6 +38,19 @@ export class UsersService {
 
   async register(registerUser: RegisterUserDto) {
 
+    const exists = await this.userRepository.findOne({
+      where: {
+        email: registerUser.email
+      }
+    })
+
+    if(exists)
+      throw new HttpException(
+        'Este e-mail já está em uso',
+        HttpStatus.CONFLICT
+      )
+
+
     const user = new User()
 
     user.email = registerUser.email
@@ -46,7 +59,9 @@ export class UsersService {
       
     await user.save()
 
-    return user;
+    const { password, ...result } = user;
+
+    return result;
 
   }
 

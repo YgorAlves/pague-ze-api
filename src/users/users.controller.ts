@@ -12,7 +12,7 @@ export class UsersController {
   ) { }
 
   @Post('register')
-  async register(@Body() registerUser: RegisterUserDto) {
+  async register(@Body() registerUser: RegisterUserDto): Promise<object> {
     return await this.userService.register(registerUser);
   }
 
