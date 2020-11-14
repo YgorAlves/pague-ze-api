@@ -1,6 +1,6 @@
 //id username email password
 
-import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Account } from "./account.entity";
 import * as bcrypt from 'bcrypt'
 
@@ -19,8 +19,9 @@ export class User extends BaseEntity{
   @Column('varchar', {length: 250, nullable: false})
   password: string;
 
-  @OneToMany(() => Account, acc => acc.user)
-  account: Account[]
+  @OneToOne(() => Account)
+  @JoinColumn()
+  account: Account
 
   @CreateDateColumn()
   createdAt: Date;

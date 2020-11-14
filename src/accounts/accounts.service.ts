@@ -12,27 +12,18 @@ export class AccountsService {
     @InjectRepository(Account) private accountRepository: Repository<Account>
   ){}
 
-  async createAccount(createAccountDto: CreateAccountDto, user: User): Promise<CreateAccountDto> {
+  async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
 
-    const {name, balance, type} = createAccountDto
-    
-    const account = {
-      name, balance, type
-    }
-    console.log(user)
+    const { name, balance, type } = createAccountDto
+
     const newAccount = new Account()
 
     newAccount.name = name
     newAccount.balance = balance
     newAccount.type = type.toLocaleUpperCase()
-    newAccount.user = user
+    // newAccount.user = user
 
-    try {
-      await newAccount.save()
-    } catch (e) {
-      console.log(e);
-      throw new HttpException('', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    await newAccount.save()
 
     return newAccount;
 

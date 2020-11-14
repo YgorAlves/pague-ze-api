@@ -11,9 +11,9 @@ export class AccountsController {
 
   constructor(private accountsService: AccountsService){}
   
-  @Post('create')
-  async createAccount(@Body() createAccountDto: CreateAccountDto, @CurrentUser() user: User): Promise<CreateAccountDto> {
-    return await this.accountsService.createAccount(createAccountDto, user)
-  }
+  // @Post('create')
+  // async createAccount(@Body() createAccountDto: CreateAccountDto, @CurrentUser() user: User): Promise<CreateAccountDto> {
+  //   return await this.accountsService.createAccount(createAccountDto, user)
+  // }
 
 }

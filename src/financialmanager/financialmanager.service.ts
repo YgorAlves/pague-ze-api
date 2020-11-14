@@ -15,7 +15,7 @@ export class FinancialmanagerService {
   ) { }
 
   async createTransaction(createTransactionDto: CreateTransactionDto): Promise<FinancialManager> {
-    const { amount, description, type, userId } = createTransactionDto;
+    const { amount, description, type, userId, createdTransaction } = createTransactionDto;
 
     const user = await this.userService.findOne(userId)
 
@@ -25,6 +25,7 @@ export class FinancialmanagerService {
     fin.type = type
     fin.amount = amount
     fin.user = user
+    fin.createdTransaction = createdTransaction
     
     await fin.save()
 
@@ -62,11 +63,12 @@ export class FinancialmanagerService {
 
   async update (idDto: IdDto, createTransactionDto: CreateTransactionDto) {
     const { id } = idDto
-    const { amount, description, type } = createTransactionDto;
+    const { amount, description, type, createdTransaction } = createTransactionDto;
     const fin = await this.findOne(id)
     fin.amount  = amount
     fin.description  = description
     fin.type  = type
+    fin.createdTransaction  = createdTransaction
     await fin.save()
     return fin
   }

@@ -21,9 +21,13 @@ export class FinancialManager extends BaseEntity{
   @Column('decimal', {precision: 10, scale: 2})
   amount: number;
 
+  @Column('date', {nullable: true})
+  createdTransaction: Date;
+
   @CreateDateColumn()
   createdAt: Date;
 
+  
   @UpdateDateColumn()
   updateAt: Date;
 

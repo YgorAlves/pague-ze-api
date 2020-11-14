@@ -24,8 +24,6 @@ import * as mercadopago from 'mercadopago'
         ]
       };
 
-      console.log(mercadopago)
-
       const res = await mercadopago.preferences.create(preference)
 
       return res;

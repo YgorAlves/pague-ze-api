@@ -19,8 +19,11 @@ export class AuthService {
     token: string
   ): Promise<{ isValid: boolean; userResult?: IUserResult }> {
     try {
+      console.log(this.jwtService.verify(token))
+
       const { userId } = this.jwtService.verify(token);
       const user = await this.usersService.findOne(userId);
+      console.log(user)
       const { password, ...userResult } = user;
 
       return { userResult, isValid: true };
@@ -41,7 +44,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { email: user.email, sub: user.userId };
+    const payload = { email: user.email, userId: user.id };
     return {
       access_token: this.jwtService.sign(payload),
     };

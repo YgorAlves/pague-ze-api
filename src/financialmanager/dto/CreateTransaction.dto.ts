@@ -13,7 +13,7 @@ export class CreateTransactionDto {
 
   @ApiProperty({
     example: '1 - Entrada, 0 - Saida',
-    description: 'Se a operação a ser cadastrada é entra ou saida',
+    description: 'Se a operação a ser cadastrada é entrada ou saida',
   })
   @IsNotEmpty()
   type: number;
@@ -24,4 +24,11 @@ export class CreateTransactionDto {
   })
   @IsNotEmpty()
   amount: number;
+
+  @ApiProperty({
+    example: '2020-11-14',
+    description: 'Data da transação, tipo Date(ISO_8601)',
+  })
+  @IsNotEmpty()
+  createdTransaction: Date;
 }

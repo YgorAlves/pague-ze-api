@@ -24,6 +24,7 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   async getProfile(@CurrentUser() user: User) {
+    console.log(user)
     return await this.userService.getProfile(user);
   }
   

@@ -18,8 +18,8 @@ export class Account extends BaseEntity{
   @Column('decimal', {precision: 10, scale: 2})
   balance: number;
 
-  @ManyToOne(() => User, user => user.account)
-  user: User
+  // @OneToOne(() => User, user => user.account)
+  // user: User
 
   @CreateDateColumn()
   createdAt: Date;

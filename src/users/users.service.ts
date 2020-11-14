@@ -1,5 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AccountsService } from 'src/accounts/accounts.service';
+import { Account } from 'src/models/account.entity';
 import { User } from 'src/models/user.entity';
 import { Repository } from 'typeorm';
 import { RegisterUserDto } from './dto/RegisterUser.dto';
@@ -8,7 +10,8 @@ import { RegisterUserResponseDto } from './dto/RegisterUserResponse.dto';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>
+    @InjectRepository(User) private userRepository: Repository<User>,
+    private accountService: AccountsService
   ) { }
 
   async findOne (id: string): Promise<User> {
@@ -61,12 +64,21 @@ export class UsersService {
         HttpStatus.CONFLICT
       )
 
+    const account = await this.accountService.createAccount({
+      name: 'Carteira Digital',
+      type: 'DIGITAL',
+      balance: 0.00
+    })
+
+
+
 
     const user = new User()
 
     user.email = registerUser.email
     user.username = registerUser.username
     user.password = registerUser.password
+    user.account = account
       
     await user.save()
 
