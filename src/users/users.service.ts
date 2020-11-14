@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/models/user.entity';
 import { Repository } from 'typeorm';
+import { RegisterUserDto } from './dto/RegisterUser.dto';
 
 @Injectable()
 export class UsersService {
@@ -24,13 +25,13 @@ export class UsersService {
     return user
   }
 
-  async register(any: any) {
+  async register(registerUser: RegisterUserDto) {
 
     const user = new User()
 
-    user.email = any.email
-    user.username = any.username
-    user.password = any.password
+    user.email = registerUser.email
+    user.username = registerUser.username
+    user.password = registerUser.password
       
     await user.save()
 
