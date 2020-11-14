@@ -8,9 +8,9 @@ export class MercadopagoService {
 
   async test() {
 
-    console.log(this.mercadopago)
+    // console.log(this.mercadopago)
     
-    console.log(this.mercadopago)
+    // console.log(this.mercadopago)
     
     return true
   }
