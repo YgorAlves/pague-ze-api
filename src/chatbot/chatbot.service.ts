@@ -24,7 +24,7 @@ export class ChatbotService {
         term: ["depositar"],
         res: "Beleza! vamos adicionar uma graninha na sua carteira com cartão de credito, débito ou boleto?"
       }, {
-        term: ["ajuda","ajud", "socoro", "help", "socorro"],
+        term: ["ajuda","ajud", "socoro", "help", "socorro", "ola", "oi","olá","ei"],
         res: "Opa! Estou aqui para isso mesmo, você deseja Pagar ou Depositar?"
       },
       {
@@ -37,7 +37,7 @@ export class ChatbotService {
       },
       {
         term: ["reais","dinheiro","$"],
-        res: "Processado... Boleto gerado <br> 34191.79001 01043.510047 91020.150008 5 84390026000"
+        res: "Processado... Boleto gerado \n 34191.79001 01043.510047 91020.150008 5 84390026000"
       },
 
     ]
