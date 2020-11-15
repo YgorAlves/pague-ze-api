@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ChatbotService } from './chatbot.service';
 import MessageDto from './dto/Message.dto';
 
@@ -11,6 +12,7 @@ export class ChatbotController {
   ){}
 
   @ApiOperation({ summary: 'Send Message to this route :D' })
+  @UseGuards(JwtAuthGuard)
   @Post('/messages')
   async getMessage(@Body() message: MessageDto): Promise<MessageDto> {
     return await this.chatbotService.getMessage(message.message);

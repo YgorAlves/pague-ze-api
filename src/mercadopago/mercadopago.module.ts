@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { MercadopagoController } from './mercadopago.controller';
 import { MercadopagoService } from './mercadopago.service';
 import * as mercadopago from 'mercadopago'
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
+  imports: [AuthModule],
   controllers: [MercadopagoController],
   providers: [MercadopagoService,{
     provide: 'MERCADOPAGO',

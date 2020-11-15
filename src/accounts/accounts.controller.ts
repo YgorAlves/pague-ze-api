@@ -9,7 +9,7 @@ import { CreateAccountDto } from './dto/CreateAccount.dto';
 @Controller('accounts')
 export class AccountsController {
 
-  constructor(private accountsService: AccountsService){}
+  constructor(private accountsService: AccountsService) { }
 
 
 }

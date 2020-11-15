@@ -65,10 +65,10 @@ export class FinancialmanagerService {
     const { id } = idDto
     const { amount, description, type, createdTransaction } = createTransactionDto;
     const fin = await this.findOne(id)
-    fin.amount  = amount
-    fin.description  = description
-    fin.type  = type
-    fin.createdTransaction  = createdTransaction
+      fin.amount  = amount
+      fin.description  = description
+      fin.type  = type
+      fin.createdTransaction  = createdTransaction
     await fin.save()
     return fin
   }

@@ -6,12 +6,12 @@ import { ReportSpendingDto } from './dto/ReportSpending.dto';
 import { CurrentUser } from 'src/auth/current-user.decorator';
 import { User } from 'src/models/user.entity';
 
-@UseGuards(JwtAuthGuard)
 @ApiTags('Report Manager')
 @Controller('reportmanager')
 export class ReportmanagerController {
     constructor(private reportmanagerService: ReportmanagerService) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get('spending')
     async spending(@Body() reportspendingDto: ReportSpendingDto, @CurrentUser() user: User): Promise<any> {
         return await this.reportmanagerService.spending(reportspendingDto, user)

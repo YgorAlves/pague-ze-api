@@ -9,7 +9,6 @@ import { GetMonthDto } from './dto/GetMonth.dto';
 import { IdDto } from './dto/Id.dto';
 import { FinancialmanagerService } from './financialmanager.service';
 
-@UseGuards(JwtAuthGuard)
 @ApiTags('Financial Manager')
 @Controller('financialmanager')
 export class FinancialmanagerController {
@@ -19,21 +18,25 @@ export class FinancialmanagerController {
 
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('create')
   async createTransaction(@Body() createTransactionDto: CreateTransactionDto, @CurrentUser() user: User): Promise<FinancialManager> {
     return await this.financialmanagerService.createTransaction(createTransactionDto, user)
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('month')
   async getMonth(@Body() getMonthDto: GetMonthDto, @CurrentUser() user: User): Promise<FinancialManager[]> {
     return await this.financialmanagerService.getMonth(getMonthDto, user)
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('remove/:id')
   async remove(@Param() idDto: IdDto): Promise<Boolean> {
     return await this.financialmanagerService.remove(idDto)
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('update/:id')
   async update(@Param() idDto: IdDto, @Body() createTransactionDto: CreateTransactionDto): Promise<FinancialManager> {
     return await this.financialmanagerService.update(idDto, createTransactionDto)

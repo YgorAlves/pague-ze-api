@@ -17,9 +17,13 @@ export class AppController {
     return await this.authService.login(req.user);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('token')
+  async checkToken() {
+    return true;
+  }
 
-
-
+  @UseGuards(JwtAuthGuard)
   @Get()
   getHello(): string {
     return 'https://http.cat/200';

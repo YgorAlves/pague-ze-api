@@ -55,7 +55,6 @@ const boleto = {
 
 
 
-@UseGuards(JwtAuthGuard)
 @ApiTags('Payments')
 @Controller('payments')
 export class PaymentsController {
@@ -65,6 +64,7 @@ export class PaymentsController {
     return  Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min)) + Math.ceil(min) )
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('loterica')
   async generateLotericaCode(@Body() depositWalletDto: DepositWalletDto, @CurrentUser() user: User): Promise<any> {
     const code = [this.randomInt(100,999),' ',this.randomInt(100,999),' ', this.randomInt(10, 99)].join()
@@ -74,6 +74,7 @@ export class PaymentsController {
     return { identity: user.identity, code: code.replace(/,/g, '') }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('boleto')
   async generateBoleto(@Body() depositWalletDto: DepositWalletDto, @CurrentUser() user: User): Promise<any> {
     const code = [this.randomInt(100,999),' ',this.randomInt(100,999),' ', this.randomInt(10, 99)].join()
