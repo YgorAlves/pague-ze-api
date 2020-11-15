@@ -19,8 +19,8 @@ export class Payments extends BaseEntity {
   @Column('varchar')
   type: 'purchase' | 'sell' | 'transfer' | 'loterica' | 'p2p' | 'deposit';
 
-  @Column('varchar')
-  status: 'pending' | 'approved' | 'canceled'
+  @Column('varchar', {nullable: true})
+  status: 'pending' | 'approved' | 'canceled';
 
   @Column('varchar', {length: 255, nullable: true})
   description: string;

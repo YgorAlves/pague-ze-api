@@ -1,7 +1,5 @@
-const { Bancos, Boletos, streamToPromise } = require('gerar-boletos');
-// import {Bancos, Boletos, StreamToPromise} from 'gerar-boletos'
 
-const boleto = {
+export const boleto = {
   banco: new Bancos.BancoBrasil(),
   pagador: {
     nome: 'José Bonifácio de Andrada',
@@ -47,12 +45,3 @@ const boleto = {
   }
 };
 
-const novoBoleto = new Boletos(boleto);
-novoBoleto.gerarBoleto();
-
-novoBoleto.pdfFile().then(async ({ stream }) => {
-  // ctx.res.set('Content-type', 'application/pdf');	
-  await streamToPromise(stream);
-}).catch((error) => {
-  return error;
-});
