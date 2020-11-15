@@ -17,7 +17,7 @@ export class Payments extends BaseEntity {
   recipientAux: string;
 
   @Column('varchar')
-  type: 'purchase' | 'sell' | 'transfer' | 'loterica' | 'p2p' | 'deposit';
+  type: 'purchase' | 'sell' | 'transfer' | 'loterica' | 'p2p' | 'deposit' | 'pix' | 'qrcode';
 
   @Column('varchar', {nullable: true})
   status: 'pending' | 'approved' | 'canceled';

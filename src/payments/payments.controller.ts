@@ -5,6 +5,7 @@ import { User } from 'src/models/user.entity';
 import { PaymentsService } from './payments.service';
 import {DepositWalletDto} from './dto/DepositWallet.dto'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { PayContactDto } from './dto/PayContact.dto';
 const { Bancos, Boletos, streamToPromise } = require('gerar-boletos');
 
 const boleto = {
@@ -96,6 +97,13 @@ export class PaymentsController {
     await this.paymentsService.depositWallet(depositWalletDto, user)
 
     return { identity: user.identity, code: '34191.79001 01043.510047 91020.150008 5 84390026000' }
+  }
+
+
+  @UseGuards(JwtAuthGuard)
+  @Post('contact')
+  async payContact(@Body() payContactDto: PayContactDto, @CurrentUser() user: User): Promise<any> {
+    return await this.paymentsService.payContact(payContactDto, user);
   }
 
 
