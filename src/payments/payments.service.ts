@@ -17,10 +17,11 @@ export class PaymentsService {
   ){}
 
   async depositWallet(depositWalletDto: DepositWalletDto, userDto: User): Promise<any> {
-console.log(depositWalletDto)
+  // console.log(depositWalletDto)
+  
     const user = await this.userService.findOne(userDto.id)
       let currentBalance = Number(user.account.balance);
-      currentBalance += depositWalletDto.amount
+      currentBalance += Number(depositWalletDto.amount)
       user.account.balance = currentBalance
     
     await user.account.save()
