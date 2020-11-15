@@ -9,10 +9,11 @@ import { ChatbotModule } from './chatbot/chatbot.module';
 import { MercadopagoModule } from './mercadopago/mercadopago.module';
 import { AuthModule } from './auth/auth.module';
 import { FinancialmanagerModule } from './financialmanager/financialmanager.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(),
-    UsersModule, AccountsModule, ChatbotModule, MercadopagoModule, AuthModule, FinancialmanagerModule],
+    UsersModule, AccountsModule, ChatbotModule, MercadopagoModule, AuthModule, FinancialmanagerModule, PaymentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

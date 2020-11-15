@@ -19,6 +19,9 @@ export class User extends BaseEntity{
   @Column('varchar', {length: 250, nullable: false})
   password: string;
 
+  @Column('varchar', {length: 16, nullable: false})
+  identity: string;
+
   @OneToOne(() => Account)
   @JoinColumn()
   account: Account

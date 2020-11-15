@@ -15,7 +15,10 @@ export class UsersService {
   ) { }
 
   async findOne (id: string): Promise<User> {
-    const user = await this.userRepository.findOne(id)
+    const user = await this.userRepository.findOne(id, {
+      relations: ["account"]
+    })
+
     if (!user) {
       throw new HttpException(
         'Usuário não encontrado',
@@ -67,7 +70,7 @@ export class UsersService {
     const account = await this.accountService.createAccount({
       name: 'Carteira Digital',
       type: 'DIGITAL',
-      balance: 0.00
+      balance: 0
     })
 
 
