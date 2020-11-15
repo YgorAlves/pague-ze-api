@@ -37,16 +37,15 @@ export class ChatbotService {
       },
       {
         term: ["reais","dinheiro","$"],
-        res: "Processado... Boleto gerado \n 34191.79001 01043.510047 91020.150008 5 84390026000"
+        res: "Boleto gerado \n 34191.79001 01043.510047 91020.150008 5 84390026000"
       },
+      {
+        term: ["obrigado","obg","thau", "fim"],
+        res: "Opa, por nada, foi um prazer, volte quando precisar. Obrigado!"
+      }
 
     ]
     
-    //parapara  para  para !! para caralho para de digitar cacete ow demonio
-    //para de digitar
-    //pra que? show? array de possibilidade, so cuidado pra n repetir, pq vai pegar o primeiro res que o term bater
-    
-    // const response = obj.find(o => message.includes(o.term))
     const response = obj.find(o => o.term.some(ea => (message.toLowerCase()).includes(ea)))
 
     if(response)
