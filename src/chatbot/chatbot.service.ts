@@ -24,13 +24,22 @@ export class ChatbotService {
         term: ["depositar"],
         res: "Beleza! vamos adicionar uma graninha na sua carteira com cartão de credito, débito ou boleto?"
       }, {
-        term: ["ajuda","ajud", "socoro", "help", "socorro"],
+        term: ["ajuda","ajud", "socoro", "help", "socorro", "ola", "oi","olá","ei"],
         res: "Opa! Estou aqui para isso mesmo, você deseja Pagar ou Depositar?"
       },
       {
         term: ["seu nome","chamo", "quem é", "você", "quem"],
         res: "Opa! eu sou o Zé. Estou pronto para te ajudar, oque deseja? Pagar ou Depositar?"
       },
+      {
+        term: ["boleto", "credito", "debito"],
+        res: "Qual valor você quer depositar?"
+      },
+      {
+        term: ["reais","dinheiro","$"],
+        res: "Processado... Boleto gerado \n 34191.79001 01043.510047 91020.150008 5 84390026000"
+      },
+
     ]
     
     //parapara  para  para !! para caralho para de digitar cacete ow demonio

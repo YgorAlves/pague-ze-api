@@ -32,12 +32,14 @@ export class FinancialmanagerService {
   }
 
   async getMonth (getMonthDto: GetMonthDto, user: User):Promise<FinancialManager[]> {
-    const { month } = getMonthDto
-    const fins = this.financialmanagerRepository.createQueryBuilder()
+    const { month, filters } = getMonthDto
+    let fins = this.financialmanagerRepository.createQueryBuilder()
+      .select('financialmanager')
+      .from(FinancialManager,'financialmanager')
       .where('MONTH(financialmanager.createdAt) = MONTH(:month)',{ month: month })
       .andWhere('YEAR(financialmanager.createdAt) = YEAR(:month)',{ month: month })
       .andWhere('financialmanager.userId = :userId', { userId: user.id })
-      // .andWhere(getMonthDto.filters.type !== undefined ? " type = :type " : '1=1' , { type: getMonthDto.filters.type })
+      .andWhere(filters !== undefined ? " financialmanager.type = :type " : '1=1' , { type: filters !== undefined ? filters.type : '' })
       .getMany()
     return fins
   }
