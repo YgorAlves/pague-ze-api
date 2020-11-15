@@ -81,6 +81,7 @@ export class UsersService {
     user.email = registerUser.email
     user.username = registerUser.username
     user.password = registerUser.password
+    user.identity = registerUser.identity
     user.account = account
       
     await user.save()
