@@ -3,6 +3,7 @@
 import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Account } from "./account.entity";
 import * as bcrypt from 'bcrypt'
+import { Contacts } from "./contacts.entity";
 
 @Entity('users')
 export class User extends BaseEntity{
@@ -16,11 +17,14 @@ export class User extends BaseEntity{
   @Column('varchar', {length: 50, nullable: false, unique: true})
   email: string;
 
-  @Column('varchar', {length: 250, nullable: false})
+  @Column('varchar', {length: 250, nullable: false, select: false})
   password: string;
 
   @Column('varchar', {length: 16, nullable: false})
   identity: string;
+
+  @Column('varchar', {length: 250, nullable: true})
+  photo: string;
 
   @OneToOne(() => Account)
   @JoinColumn()
@@ -32,6 +36,8 @@ export class User extends BaseEntity{
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @OneToMany(() => Contacts, contacts => contacts.user)
+  contacts: Contacts[]
   
   @BeforeInsert()
   async hashPassword() {
