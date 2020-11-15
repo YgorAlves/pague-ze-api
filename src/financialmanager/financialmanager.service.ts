@@ -72,4 +72,23 @@ export class FinancialmanagerService {
     await fin.save()
     return fin
   }
+
+  async receipts (date: Date, user: User): Promise<any> {
+    const fin = await this.financialmanagerRepository.createQueryBuilder()
+    .select('financialmanager')
+    .from(FinancialManager,'financialmanager')
+    .where('MONTH(financialmanager.createdAt) = MONTH(:month)',{ month: date })
+    .andWhere('YEAR(financialmanager.createdAt) = YEAR(:month)',{ month: date })
+    .andWhere('financialmanager.userId = :userId', { userId: user.id })
+    .andWhere('financialmanager.type = "1"')
+    .getMany()
+    let total = 0
+    fin.forEach(f => {
+      total += Number(f.amount)
+    })
+    return {
+      total: total,
+      rows: fin
+    }
+  }
 }
