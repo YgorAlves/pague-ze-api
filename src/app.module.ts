@@ -10,10 +10,11 @@ import { MercadopagoModule } from './mercadopago/mercadopago.module';
 import { AuthModule } from './auth/auth.module';
 import { FinancialmanagerModule } from './financialmanager/financialmanager.module';
 import { PaymentsModule } from './payments/payments.module';
+import { ReportmanagerModule } from './reportmanager/reportmanager.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(),
-    UsersModule, AccountsModule, ChatbotModule, MercadopagoModule, AuthModule, FinancialmanagerModule, PaymentsModule],
+    UsersModule, AccountsModule, ChatbotModule, MercadopagoModule, AuthModule, FinancialmanagerModule, PaymentsModule, ReportmanagerModule],
   controllers: [AppController],
   providers: [AppService],
 })
