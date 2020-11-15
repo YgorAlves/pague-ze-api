@@ -12,7 +12,10 @@ export class DepositWalletDto {
 
   // @IsNotEmpty()
   // description: string;
-
+  @ApiProperty({
+    example: '12.50',
+    description: 'Valor a ser depositado',
+  })
   @IsNotEmpty()
   amount: number;
 

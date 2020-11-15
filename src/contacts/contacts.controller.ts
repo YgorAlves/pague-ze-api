@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from 'src/auth/current-user.decorator';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Contacts } from 'src/models/contacts.entity';
@@ -6,6 +7,7 @@ import { User } from 'src/models/user.entity';
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/CreateContact.dto';
 
+@ApiTags('contacts')
 @Controller('contacts')
 export class ContactsController {
 
