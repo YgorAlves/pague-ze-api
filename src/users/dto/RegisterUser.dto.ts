@@ -17,6 +17,13 @@ export class RegisterUserDto {
   email: string;
 
   @ApiProperty({
+    example: '12345678910',
+    description: 'CPF Do cliente',
+  })
+  @IsNotEmpty()
+  identity: string;
+
+  @ApiProperty({
     example: 'suasenhasecreta',
     description: 'Senha da conta',
   })
