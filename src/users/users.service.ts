@@ -73,9 +73,6 @@ export class UsersService {
       balance: 0
     })
 
-
-
-
     const user = new User()
 
     user.email = registerUser.email

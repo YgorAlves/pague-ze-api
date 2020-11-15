@@ -29,6 +29,7 @@ console.log(depositWalletDto)
       payment.sender = userDto
       payment.recipient = userDto
       payment.type = "deposit"
+      payment.status = "approved"
       payment.amount = depositWalletDto.amount
     await payment.save()
 
