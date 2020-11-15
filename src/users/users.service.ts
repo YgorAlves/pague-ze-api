@@ -1,9 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccountsService } from 'src/accounts/accounts.service';
+import { GetContactDto } from 'src/contacts/dto/getContact.dto';
 import { Account } from 'src/models/account.entity';
 import { User } from 'src/models/user.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { RegisterUserDto } from './dto/RegisterUser.dto';
 import { RegisterUserResponseDto } from './dto/RegisterUserResponse.dto';
 
@@ -13,6 +14,26 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
     private accountService: AccountsService
   ) { }
+
+  async findByNames(getContactDto: GetContactDto): Promise<User[]> {
+    const {name} = getContactDto
+
+    const users = await this.userRepository.find({
+      where: [
+        { email: Like(`%${name}%`) },
+        { username: Like(`%${name}%`) }
+      ]
+    })
+    
+    // if (!users.length) {
+    //   throw new HttpException(
+    //     'Nenhum usuario encontrado',
+    //     HttpStatus.NOT_FOUND
+    //   )
+    // }
+
+    return users
+  }
 
   async findOne (id: string): Promise<User> {
     const user = await this.userRepository.findOne(id, {

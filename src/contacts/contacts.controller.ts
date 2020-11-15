@@ -6,12 +6,19 @@ import { Contacts } from 'src/models/contacts.entity';
 import { User } from 'src/models/user.entity';
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/CreateContact.dto';
+import { GetContactDto } from './dto/getContact.dto';
 
 @ApiTags('contacts')
 @Controller('contacts')
 export class ContactsController {
 
   constructor(private contactsService: ContactsService) { }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('name')
+  async getContactsByName(@Body() getContactDto: GetContactDto, @CurrentUser() user: User): Promise<User[]> {
+    return await this.contactsService.getContactsByName(getContactDto, user);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')

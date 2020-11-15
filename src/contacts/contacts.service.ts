@@ -5,12 +5,20 @@ import { User } from 'src/models/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { CreateContactDto } from './dto/CreateContact.dto';
+import { GetContactDto } from './dto/getContact.dto';
 
 @Injectable()
 export class ContactsService {
 
   constructor(@InjectRepository(Contacts) private contactsRepository: Repository<Contacts>,
   private usersService: UsersService) { }
+
+  async getContactsByName(getContactDto: GetContactDto, user: User): Promise<User[]> {
+
+    const users = await this.usersService.findByNames(getContactDto);
+
+    return users
+  }
 
   async getOneContact(id: string, user: User): Promise<Contacts> {
     const contact = await this.contactsRepository.findOne({
@@ -40,12 +48,12 @@ export class ContactsService {
       relations: ["contact"]
     })
 
-    if(!contacts.length) {
-      throw new HttpException(
-        'Voce ainda não possui contatos :(',
-        HttpStatus.BAD_REQUEST
-      )
-    }
+    // if(!contacts.length) {
+    //   throw new HttpException(
+    //     'Voce ainda não possui contatos :(',
+    //     HttpStatus.BAD_REQUEST
+    //   )
+    // }
 
     return contacts
   }
