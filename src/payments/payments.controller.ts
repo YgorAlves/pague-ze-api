@@ -77,11 +77,15 @@ export class PaymentsController {
   @Post('boleto')
   async generateBoleto(@Body() depositWalletDto: DepositWalletDto, @CurrentUser() user: User): Promise<any> {
     const code = [this.randomInt(100,999),' ',this.randomInt(100,999),' ', this.randomInt(10, 99)].join()
+    
     const novoBoleto = new Boletos(boleto);
     novoBoleto.gerarBoleto();
-    console.log(novoBoleto)
+    
+    // console.log(novoBoleto)
+    // console.log(novoBoleto.getNumeroDoDocumentoFormatado())
+    
     novoBoleto.pdfFile().then(async (stream) => {
-      console.log(stream)
+      // console.log(stream)
       // ctx.res.set('Content-type', 'application/pdf');	
       await streamToPromise(stream);
     }).catch((error) => {
@@ -90,7 +94,7 @@ export class PaymentsController {
 
     await this.paymentsService.depositWallet(depositWalletDto, user)
 
-    return { identity: user.identity, code: code.replace(/,/g, '') }
+    return { identity: user.identity, code: '34191.79001 01043.510047 91020.150008 5 84390026000' }
   }
 
 
